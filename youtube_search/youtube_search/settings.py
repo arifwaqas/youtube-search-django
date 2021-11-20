@@ -77,10 +77,7 @@ WSGI_APPLICATION = 'youtube_search.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'your-db-name',
-        'CLIENT': {
-           'host': 'your-db-host',
-        }
+        'NAME': 'demodatabase',
     }
 }
 
