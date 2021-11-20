@@ -1,12 +1,32 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import requests
 
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
+
+from search.models import ResultModel
+from search.serializers import ResultModelSerializer
+
 from django.conf import settings
 from django.shortcuts import render, redirect
+
+@csrf_exempt
+def postdata(request):
+    if request.method=='POST':
+        results_data=JSONParser().parse(request)
+        print(results_data)
+        results_serializer=ResultModelSerializer(data=results_data)
+        if results_serializer.is_valid():
+            results_serializer.save()
+            return JsonResponse("Added Successfully", safe=False)
+        else:
+            return JsonResponse("Failed", safe=False)
 
 def index(request):
     videos = []
 
+    
     search_url = 'https://www.googleapis.com/youtube/v3/search'
     video_url = 'https://www.googleapis.com/youtube/v3/videos'
 
