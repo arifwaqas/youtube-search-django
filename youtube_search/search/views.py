@@ -1,8 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import requests
 
-from isodate import parse_duration
-
 from django.conf import settings
 from django.shortcuts import render, redirect
 
@@ -43,22 +41,32 @@ def index(request):
 
         results = r.json()['items']
 
-        
         for result in results:
             video_data = {
                 'title' : result['snippet']['title'],
                 'id' : result['id'],
                 'url' : f'https://www.youtube.com/watch?v={ result["id"] }',
-                'duration' : int(parse_duration(result['contentDetails']['duration']).total_seconds() // 60),
+                #'duration' : int(parse_duration(result['contentDetails']['duration']).total_seconds() // 60),
                 'thumbnail' : result['snippet']['thumbnails']['high']['url']
             }
 
             videos.append(video_data)
+        
+        
+    if len(videos)>0:
+        video_paginator = Paginator(videos, 3)
 
-    video_page = Paginator(videos, 3)
+        page=request.GET.get('page')
 
-    page=request.GET.get('page')
 
+        try:
+            video_page=video_paginator.page(page)
+        except PageNotAnInteger:
+            video_page=video_paginator.page(1)
+        except EmptyPage:
+            video_page=video_paginator.page(video_paginator.num_pages)
+        
+    
     context = {
         'videos' : videos
     }
