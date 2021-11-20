@@ -31,3 +31,13 @@ footer {
 footer p {
   margin-bottom: .25rem;
 }
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
