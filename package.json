@@ -1,0 +1,23 @@
+{
+  "name": "django-yt-app",
+  "version": "1.0.0",
+  "description": "Simple youtube api search integration with django",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/arifwaqas/django-youtube-search-api"
+  },
+  "keywords": [
+    "Made",
+    "for",
+    "Josh",
+    "Talks",
+    "internship",
+    "assignment"
+  ],
+  "author": "Arif Waqas",
+  "license": "ISC"
+}
