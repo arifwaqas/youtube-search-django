@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import requests
 
 from isodate import parse_duration
@@ -54,6 +54,10 @@ def index(request):
             }
 
             videos.append(video_data)
+
+    video_page = Paginator(videos, 3)
+
+    page=request.GET.get('page')
 
     context = {
         'videos' : videos
