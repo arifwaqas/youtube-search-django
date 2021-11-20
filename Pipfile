@@ -10,6 +10,7 @@ isodate = "*"
 uvicorn = "*"
 celery = "*"
 djongo = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
